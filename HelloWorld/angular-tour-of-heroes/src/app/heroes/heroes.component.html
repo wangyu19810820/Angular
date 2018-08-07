@@ -4,17 +4,30 @@
       (click)="onSelect(oneHeor)"
       [class.selected]="oneHeor === selectedHero">
     <span class="badge">{{oneHeor.id}}</span>{{oneHeor.name}}
+    <button class="delete" title="delete hero"
+            (click)="delete(oneHeor)">x</button>
   </li>
 </ul>
 
 <app-hero-detail [hero]="selectedHero"></app-hero-detail>
 
-<h2>{{hero.name | uppercase}} Details</h2>
-<div><span>id: </span>{{hero.id}}</div>
-<div><span>name: </span>{{hero.name}}</div>
-
 <div>
-  <label>name:
-    <input [(ngModel)]="hero.name" placeholder="name">
+  <label>Hero name:
+    <input #heroName />
   </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
 </div>
+
+<!-- 直接显示属性hero中的信息 -->
+<!--<h2>{{hero.name | uppercase}} Details</h2>-->
+<!--<div><span>id: </span>{{hero.id}}</div>-->
+<!--<div><span>name: </span>{{hero.name}}</div>-->
+
+<!--<div>-->
+  <!--<label>name:-->
+    <!--<input [(ngModel)]="hero.name" placeholder="name">-->
+  <!--</label>-->
+<!--</div>-->

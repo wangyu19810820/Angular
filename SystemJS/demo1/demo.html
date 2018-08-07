@@ -1,0 +1,33 @@
+<!--
+    SystemJs和traceur导入es6的模块
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- <script src="//unpkg.com/traceur@0.0.111/bin/traceur.js"></script> -->
+    <!-- <script src="//unpkg.com/systemjs@0.19.37/dist/system.src.js"></script> -->
+    
+    <script src="traceur.js"></script>
+    <!--SystemJs用0.19.37版本，最新的2.xx会报错 -->
+    <script src="system.src.js"></script>
+
+    <script>
+        System.config({
+            transpiler: 'traceur',
+            traceurOptions: {annotations: true},
+        });
+
+        SystemJS.import('./demo.js').then(function(m) {
+            console.log(new m.q().es6); // yay
+        });
+    </script>
+</head>
+<body>
+    dd
+</body>
+</html>
