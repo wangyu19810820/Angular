@@ -1,0 +1,27 @@
+<!--
+    使用TypeScript
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="//unpkg.com/typescript@2.0.0"></script>
+    <script src="system.src.js"></script>
+    <script>
+        System.config({
+            transpiler: 'typescript',
+            typescriptOptions: {emitDecoratorMetadata: true},
+        })
+        
+        SystemJS.import('./demo.ts').then(function(m) {
+            console.log(m.color); 
+        });
+    </script>
+</head>
+<body>
+    bb
+</body>
+</html>
