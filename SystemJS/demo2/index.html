@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="system.js"></script>
+    <script>
+        SystemJS.config({
+            // 前缀
+            baseURL:'/modules',
+            // 名称映射(别名)
+            map: {
+                onejs:'main.js',
+            }
+        })
+
+        SystemJS.import('onejs')
+                .then(function(m){
+                        console.log(m.name);
+                      }
+        );
+
+        // 导入的js文件以./开头，则忽略baseURL和map配置
+        // SystemJS.import('./main.js');
+        // 抛异常
+        // SystemJS.import('./onejs');
+
+        // 导入url地址的js，下载文件有延迟，导入的效果不能立即生效
+        SystemJS.import('https://code.jquery.com/jquery.js');
+        function click1(){
+            $('#div1').text('abc');
+            // 无法使用main.js模块内的私有变量
+            // console.log(name1);
+        }
+        
+        
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <input type="button" onclick="click1()" value="button" />
+</body>
+</html>
