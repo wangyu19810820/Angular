@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+<h2>hero is: {{myHero}}</h2>
+<h3>{{hero.id + 5}}:{{hero.name}}</h3>
+
+<div *ngFor="let hero of heroes">
+  <label>{{hero.id}}</label>{{hero.name}}
+</div>
+
+<!-- isUnchanged为true的时候，按钮不可用 -->
+<button [disabled]="isUnchanged">Save</button>
