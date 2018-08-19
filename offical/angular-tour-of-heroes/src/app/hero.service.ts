@@ -14,14 +14,16 @@ export class HeroService {
 
   private messageService: MessageService;
   private heroesUrl = 'api/heroes';  // URL to web api
-
+  private dateStr: string;
 
   constructor(private http: HttpClient,
               messageService: MessageService) {
     this.messageService = messageService;
+    this.dateStr = 'time:' + new Date().getTime();
   }
 
   getHeroes(): Observable<Hero[]> {
+    console.log(this.dateStr);
     this.messageService.add('HeroService: fetched heroes');
     // 使用mock数据
     // return of(HEROES);

@@ -1,3 +1,4 @@
+<!-- 插值表达式，支持表达式，本质上也是属性绑定。Angular 把这些插值表达式翻译成相应的属性绑定 -->
 <h1>{{title}}</h1>
 <h2>hero is: {{myHero}}</h2>
 <h3>{{hero.id + 5}}:{{hero.name}}</h3>
@@ -8,3 +9,111 @@
 
 <!-- isUnchanged为true的时候，按钮不可用 -->
 <button [disabled]="isUnchanged">Save</button>
+
+<!-- isSpecial为true时，div有"special"的class -->
+<div [class.special]="isSpecial">Special</div>
+
+<!-- 指定文本颜色(css style中的color属性)为红色或绿色 -->
+<div [style.color]="isSpecial ? 'red' : 'green'">[style.color]=""</div>
+
+<!-- 绑定html的attribute colspan -->
+<table border="1" width="100">
+  <tr><td>1</td><td>2</td></tr>
+  <tr><td [attr.colspan]="colspanNum">a</td></tr>
+</table>
+
+<!-- 绑定Component中的btnClick方法,on-xxx被称为规范形式 -->
+<button (click)="btnClick()">点击</button>
+<button on-click="btnClick()">点击</button>
+
+<!-- 双向绑定，app.module中需引入FormsModule -->
+<p><input [(ngModel)]="name1" /><label>{{name1}}</label></p>
+
+<!-- 属性绑定的规范形式，等同于[value]="name1" -->
+<input type="button" bind-value="name1" />
+
+<!-- 插值表达式会被翻译成属性绑定，遇到<script></script> -->
+<!-- 插值表达式会做html的转义，属性绑定则直接去除script。都能保证内容无害 -->
+<p>{{scriptStr}}</p>
+<p [innerHtml]="scriptStr"></p>
+
+<!-- $event 是事件对象，传递关于此事件的信息，包括数据值 -->
+<input (input)="name1=$event.target.value"/>
+<input (input)="inputName($event)"/>
+
+<!-- hero-detail模块定义了clickShowHero事件，此处绑定该事件的处理函数 -->
+<app-hero-detail (clickShowHero)="showHero($event)" [hero]="hero"></app-hero-detail>
+
+<!-- 双向绑定语法实际上是属性绑定和事件绑定的语法糖。 -->
+<!-- [size]="fontSizePx" (sizeChange)="fontSizePx=$event" -->
+<app-sizer [(size)]="fontSizePx"></app-sizer>
+<div [style.font-size.px]="fontSizePx">Resizable Text</div>
+
+<!-- specialArrayn内的元素，成为div的class -->
+<div [ngClass]="specialArray">SpecialArray</div>
+<!-- specialObject内属性值为true时属性名是class -->
+<div [ngClass]="specialObject">SpecialObject</div>
+
+<!-- styleObject内的对象，key是css的样式名，value是css样式值 -->
+<div [ngStyle]="styleObject">styleObject</div>
+
+<!-- 双向数据绑定，会被翻译成后两种形式 -->
+<label>{{name1}}</label>
+<input [(ngModel)]="name1">
+<input [value]="name1" (input)="name1=$event.target.value">
+<input [ngModel]="name1" (ngModelChange)="name1=$event">
+
+<!-- ngIf可防空指令 -->
+<div *ngIf="hero">{{hero.name}}</div>
+<div *ngIf="falseValue">{{falseValue}}</div>
+<div *ngIf="nullObject">{{nullObject.name}}</div>
+
+<!-- 带索引的ngFor指令-->
+<ul><li *ngFor="let item of heroes;let i = index;">{{i}}:{{item.name}}</li></ul>
+<!-- 没有用trackBy，所有DOM都重绘。用了trackBy后，未改动元素，不会重绘DOM -->
+<!-- 但是以id为判断是否改动的依据，没有试出来。试下来，只要改动，就会重绘DOM -->
+<input type="button" (click)="editHeros()" value="editHeros">
+<ul><li *ngFor="let item of heroes; trackBy: trackById">{{item.name}}</li></ul>
+<ul><li *ngFor="let item of heroes;">{{item.name}}</li></ul>
+
+<!-- 选择显示不同的div，ngSwitchCase匹配了ngSwitch内的值，才会显示 -->
+<div>
+  <label *ngFor="let fav of favArr">
+    {{fav}}<input type="radio" name="favArr" [(ngModel)]="selectFav" [value]="fav">
+  </label>
+</div>
+{{selectFav}}:
+<div [ngSwitch]="selectFav">
+  <div *ngSwitchCase="'sport'">选择了体育</div>
+  <div *ngSwitchCase="'music'">选择了音乐</div>
+  <div *ngSwitchDefault>没有选择任何爱好</div>
+</div>
+
+<!-- 定义了输入框，并命名phone，后面的事件可引用这个输入框 -->
+输入电话号码：<input #phone>
+<button (click)="callPhone(phone.value)">call</button>
+
+输入电话号码：<input ref-phone1>
+<button (click)="callPhone(phone1.value)">call</button>
+
+<!-- 管道：输入一个参数，返回一个值 -->
+<div>{{"aBc" | uppercase}}</div>
+<!-- 管道可连用 -->
+<div>{{"aBc" | uppercase | lowercase}}</div>
+<!-- 返回对象的json -->
+<div>{{hero | json}}</div>
+
+<!-- 安全导航操作符 -->
+<div>
+  hero name:{{hero?.name}},
+  null hero name:{{nullObject && nullObject?.name}},
+  null hero name:{{nullObject?.name}}
+</div>
+<!-- 非空断言操作符 -->
+<div>
+  hero name:{{hero!.name}}
+</div>
+<!-- 转换成any类型，使用未声明的属性 -->
+<div>
+  hero mark:{{$any(hero).mark}}
+</div>
