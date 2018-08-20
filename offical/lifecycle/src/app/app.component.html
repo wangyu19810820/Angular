@@ -1,0 +1,9 @@
+<app-lifecycle *ngIf="toggle" [hero]="curHero"></app-lifecycle>
+<input type="button" (click)="updateHero()" value="upterHero">
+<input type="button" (click)="updateHeroName()" value="updateHeroName">
+显示hero控件<input type="checkbox" [(ngModel)]="toggle">
+
+<div>
+  name:<input [(ngModel)]="curHero.name">
+  <input type="text">
+</div>
