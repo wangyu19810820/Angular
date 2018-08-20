@@ -7,3 +7,17 @@
   name:<input [(ngModel)]="curHero.name">
   <input type="text">
 </div>
+
+<!-- AppComponent演示了AfterViewInit, AfterViewChecked -->
+<!-- 并且在无法视图即将更新时，无法修改模型并更新视图，需稍等片刻 -->
+<div>
+  <app-viewcheck></app-viewcheck>
+  info:{{viewcheckMsg}}
+</div>
+
+<div>
+  <app-contentcheck>
+    <app-viewcheck></app-viewcheck>
+  </app-contentcheck>
+  info:{{contentcheckMsg}}
+</div>

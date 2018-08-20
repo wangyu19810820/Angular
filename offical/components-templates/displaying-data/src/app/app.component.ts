@@ -28,6 +28,7 @@ export class AppComponent {
   nullObject: Hero;
   favArr = ['sport', 'music'];
   selectFav: string;
+  submitMessage = '';
 
   constructor() {
     const hero1 = new Hero(1, 'aa');
@@ -66,5 +67,9 @@ export class AppComponent {
 
   callPhone(num: string) {
     alert(num);
+  }
+
+  onSubmit(form: any) {
+    console.log(form);
   }
 }

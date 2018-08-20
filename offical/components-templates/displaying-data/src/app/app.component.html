@@ -89,12 +89,27 @@
   <div *ngSwitchDefault>没有选择任何爱好</div>
 </div>
 
-<!-- 定义了输入框，并命名phone，后面的事件可引用这个输入框 -->
+<!-- 模板引用变量，定义了输入框，并命名phone，后面的事件可引用这个输入框 -->
 输入电话号码：<input #phone>
 <button (click)="callPhone(phone.value)">call</button>
 
 输入电话号码：<input ref-phone1>
 <button (click)="callPhone(phone1.value)">call</button>
+
+<!-- 大多数情况下，Angular 会把模板引用变量的值设置为声明它的那个元素 -->
+<!-- 不过，指令也可以修改这种行为，让这个值引用到别处，比如它自身，本例中是NgForm指令的引用 -->
+<form (ngSubmit)="onSubmit(heroForm)" #heroForm="ngForm">
+  <div class="form-group">
+    <label for="name">Name
+      <input class="form-control" name="name" required [(ngModel)]="hero.name">
+    </label>
+  </div>
+  <button type="submit" [disabled]="!heroForm.form.valid">Submit</button>
+</form>
+<div [hidden]="!heroForm.form.valid">
+  {{submitMessage}}
+</div>
+
 
 <!-- 管道：输入一个参数，返回一个值 -->
 <div>{{"aBc" | uppercase}}</div>

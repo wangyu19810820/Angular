@@ -4,11 +4,15 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
+import { ViewcheckComponent } from './viewcheck/viewcheck.component';
+import { ContentcheckComponent } from './contentcheck/contentcheck.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LifecycleComponent
+    LifecycleComponent,
+    ViewcheckComponent,
+    ContentcheckComponent
   ],
   imports: [
     FormsModule,

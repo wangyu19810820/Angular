@@ -46,11 +46,14 @@ export class LifecycleComponent implements OnInit, OnChanges,
     console.log('ngAfterContentInit');
   }
 
+  // angular框架不自动检测对象属性值变化，可以用此回调手动检测
+  // 但是此函数会非常频繁被调用，任何可能更改模型的事件都会触发此回调，
+  // 哪怕绑定属性的文本框失去焦点都会触发此回调
   ngDoCheck(): void {
-    console.log('ngDoCheck' + this.oldName);
+    console.log('ngDoCheck:' + this.oldName + ',' + this.hero.name);
     console.log('new name and old name is '
-        + (this.oldName == this.hero.name) ? 'equal' :'not equal');
-    this.oldName = new String(this.hero.name);
+        + (this.oldName === this.hero.name ? 'equal' :'not equal'));
+    this.oldName = this.hero.name;
   }
 
   ngAfterContentChecked(): void {
