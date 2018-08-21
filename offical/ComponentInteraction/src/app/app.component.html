@@ -1,0 +1,18 @@
+<div *ngFor="let hero1 of heros">
+  <app-hero-child [hero]="hero1" [masterName]="master"></app-hero-child>
+</div>
+
+<div>
+  <button (click)="addVersion1()">add version1</button>
+  <button (click)="resetVersion1()">reset version1</button>
+  <button (click)="addVersion2()">add version2</button>
+  <button (click)="resetVersion2()">reset version2</button>
+  <app-version-child [versionNum1]="version1" [versionNum2]="version2"></app-version-child>
+</div>
+
+<div>
+  agree:{{agreeNum}}, disagree:{{disAgreeNum}}<br/>
+  <div *ngFor="let hero of heros">
+    <app-vote [name]="hero.name" (vote)="voteResult($event)"></app-vote>
+  </div>
+</div>

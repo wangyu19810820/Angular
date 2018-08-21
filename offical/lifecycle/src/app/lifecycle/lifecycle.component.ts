@@ -30,6 +30,8 @@ export class LifecycleComponent implements OnInit, OnChanges,
   }
 
   // 只有hero整体更改才触发此钩子，hero中的name属性更改并不会触发
+  // SimpleChanges中属性名是组件的输入属性，值是SimpleChange对象
+  // SimpleChange对象中封装了过去值，现在值，以及是否是首次改变
   ngOnChanges(changes: SimpleChanges) {
     console.log('ngOnChanges');
     for (let prop in changes) {
@@ -37,6 +39,7 @@ export class LifecycleComponent implements OnInit, OnChanges,
       let change = changes[prop];
       let cur  = JSON.stringify(change.currentValue);
       let prev = JSON.stringify(change.previousValue);
+      console.log("isFirst:" + change.isFirstChange())
       console.log("current:" + cur);
       console.log("prev:" + prev);
     }
