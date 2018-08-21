@@ -1,0 +1,11 @@
+@import './style3.css';
+
+/* 组件样式通常只会作用于组件自身的 HTML */
+h1 {
+    font-weight: 100;
+}
+
+/* /deep/ 组合器还有两个别名：>>> 和 ::ng-deep。一个样式对各级子组件的视图也生效 */
+::ng-deep h1 {
+    font-style: italic;
+}

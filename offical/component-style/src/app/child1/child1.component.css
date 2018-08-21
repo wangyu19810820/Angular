@@ -1,0 +1,16 @@
+h1 {
+    color: red;
+}
+
+/* 父组件 */
+:host {
+    display: block;
+    background-color: bisque;
+}
+
+/* 父组件中有类active */
+:host(.active) {
+    display: block;
+    border: 10px solid black;
+}
+
