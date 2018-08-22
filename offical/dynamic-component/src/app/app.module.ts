@@ -5,18 +5,21 @@ import { AppComponent } from './app.component';
 import { AdBannerComponent } from './ad-banner/ad-banner.component';
 import { HeroJobComponent } from './hero-job/hero-job.component';
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
+import { AdDirective }          from './ad.directive';
+import { AdService }            from './ad.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdBannerComponent,
     HeroJobComponent,
-    HeroProfileComponent
+    HeroProfileComponent,
+    AdDirective
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [AdService],
   bootstrap: [AppComponent],
   entryComponents: [HeroJobComponent, HeroProfileComponent]
 })

@@ -12,7 +12,7 @@ export class AdService {
 
   getAds() {
     return [
-      new AdItem(HeroJobComponent, {name: 'Bombasto', bio: 'Brave as they come'}),
+      new AdItem(HeroJobComponent, {headline: 'Bombasto', body: 'Brave as they come'}),
       new AdItem(HeroProfileComponent, {name: 'Dr IQ', bio: 'Smart as they come'})
     ];
   }
