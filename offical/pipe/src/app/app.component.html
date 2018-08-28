@@ -1,0 +1,33 @@
+<p>{{birthday}}</p>
+<p>{{birthday | date}}</p>
+<p>{{birthday | date:"yyyy-MM-dd"}}</p>
+<p>{{birthday | date:formatStr}}</p>
+<button (click)="toggleDateFormat()">toggle format</button>
+
+
+<p>{{birthday | date:'fullDate' | uppercase}}</p>
+
+<div>
+  <input [(ngModel)]="value">
+  <input [(ngModel)]="expo">
+  <p>{{value}} pow {{expo}}: {{value | exponentialStrengthPipe: expo}}</p>
+</div>
+
+<div>
+  <input #heroName (keyup.enter)="addHero(heroName.value)">
+  <button (click)="show()">show</button>
+</div>
+all:
+<div *ngFor="let hero of heros">
+  {{hero.name}}, {{hero.canFly}}
+</div>
+
+not pure fly:
+<div *ngFor="let hero of (heros | notPureFly)">
+  {{hero.name}}, {{hero.canFly}}
+</div>
+
+pure fly:
+<div *ngFor="let hero of (heros | fly)">
+  {{hero.name}}, {{hero.canFly}}
+</div>

@@ -1,0 +1,19 @@
+<button (click)="add()">add</button>
+<button (click)="remove()">remove</button>
+
+<ul>
+  <li *ngFor="let hero of heroes"
+      [@heroState]="hero.state"
+      (@heroState.start)="animationStart($event)"
+      (@heroState.done)="animationEnd($event)"
+      (click)="hero.toggleState()">
+    {{hero.name}}
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let hero of heroes"
+      [@flyInOut]="hero.state">
+    {{hero.name}}
+  </li>
+</ul>

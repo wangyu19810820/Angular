@@ -1,0 +1,29 @@
+<!-- 结构型指令，是一种语法糖，会把宿主元素套在ng-template中，并且知道相应属性 -->
+<ng-template [ngIf]="hasTitle"><div>aa</div></ng-template>
+<ng-template [ngIf]="boolFlag"><div>bb</div></ng-template>
+
+<div *ngIf="hasTitle">aa</div>
+<div *ngIf="boolFlag">bb</div>
+
+<div *ngFor="let hero of heros; let i = index; let odd=odd; trackBy:trackById" [class.odd]="odd">
+ {{i}}:{{hero}}
+</div>
+<ng-template ngFor let-hero [ngForOf]="heros" let-i="index" let-odd="odd" [ngForTrackBy]="trackById">
+  <div [class.odd]="odd">{{i}}:{{hero}}</div>
+</ng-template>
+
+<!-- 单独使用ng-template是没有内容的，会被angular翻译成注释 -->
+<div>aa<ng-template>cc</ng-template>bb</div>
+
+<!-- 使用结构性指令，需要宿主元素，如果没有合适的宿主元素，可用ng-container -->
+<select>
+  <ng-container *ngFor="let hero of heros"><option>{{hero}}</option></ng-container>
+</select>
+<select>
+  <span *ngFor="let hero of heros"><option>{{hero}}</option></span>
+</select>
+
+<!-- 自定义结构指令，属性true不显示，false显示 -->
+<div *appUnLess="hasTitle">aaaa</div>
+<div *appUnLess="boolFlag">bbbb</div>
+<button (click)="toggle()">toggle boolFlag</button>
