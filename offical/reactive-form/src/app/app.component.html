@@ -1,0 +1,10 @@
+<label>
+  Name:
+  <input type="text" [formControl]="name">
+</label>
+
+<p>{{name.value}}</p>
+
+<button (click)="updateName()">click</button>
+
+<app-profile-editor></app-profile-editor>
